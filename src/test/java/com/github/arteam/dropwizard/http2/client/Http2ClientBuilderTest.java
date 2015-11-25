@@ -1,4 +1,4 @@
-package io.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client;
 
 import org.eclipse.jetty.http.HttpFields;
 import org.eclipse.jetty.http.HttpURI;
@@ -8,7 +8,6 @@ import org.eclipse.jetty.http2.api.Session;
 import org.eclipse.jetty.http2.api.Stream;
 import org.eclipse.jetty.http2.api.server.ServerSessionListener;
 import org.eclipse.jetty.http2.client.HTTP2Client;
-import org.eclipse.jetty.http2.client.HTTP2ClientConnectionFactory;
 import org.eclipse.jetty.http2.frames.DataFrame;
 import org.eclipse.jetty.http2.frames.HeadersFrame;
 import org.eclipse.jetty.util.Callback;
@@ -19,9 +18,6 @@ import org.junit.Test;
 import java.net.InetSocketAddress;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 /**
  * Date: 11/20/15
@@ -34,7 +30,7 @@ public class Http2ClientBuilderTest {
     @Test
     public void testH2c() throws Exception {
         Http2ClientConfiguration configuration = new Http2ClientConfiguration();
-        configuration.setConnectionFactoryBuilder(new Http2CClientConnectionFactoryBuilder());
+        configuration.setConnectionFactoryBuilder(new Http2ClientConnectionFactoryBuilder());
         final HTTP2Client client = new Http2ClientBuilder()
                 .using(configuration)
                 .build();

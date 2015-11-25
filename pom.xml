@@ -15,6 +15,7 @@
         <junit.version>4.12</junit.version>
         <jetty.version>9.3.5.v20151012</jetty.version>
         <assertj.version>3.2.0</assertj.version>
+        <mockito.version>2.0.2-beta</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -122,6 +123,13 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

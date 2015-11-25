@@ -1,16 +1,14 @@
 package com.github.arteam.dropwizard.http2.client;
 
 
+import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.http2.client.HTTP2Client;
-import org.eclipse.jetty.http2.client.HTTP2ClientConnectionFactory;
-import org.eclipse.jetty.io.ClientConnectionFactory;
 
 public class Http2ClientBuilder {
 
     private Environment environment;
     private Http2ClientConfiguration configuration;
-    private ClientConnectionFactory clientConnectionFactory;
 
     public Http2ClientBuilder(Environment environment) {
         this.environment = environment;
@@ -21,23 +19,24 @@ public class Http2ClientBuilder {
         return this;
     }
 
-    public Http2ClientBuilder using(HTTP2ClientConnectionFactory clientConnectionFactory) {
-        this.clientConnectionFactory = clientConnectionFactory;
-        return this;
-    }
-
     public HTTP2Client build() {
         HTTP2Client http2Client = new HTTP2Client();
-        http2Client.setClientConnectionFactory(clientConnectionFactory);
+        http2Client.setClientConnectionFactory(configuration.getConnectionFactoryBuilder().build());
         http2Client.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         http2Client.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
-        http2Client.setProtocols(configuration.getProtocols());
         http2Client.setSelectors(configuration.getSelectors());
-        try {
-            http2Client.start();
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+
+        environment.lifecycle().manage(new Managed() {
+            @Override
+            public void start() throws Exception {
+                http2Client.start();
+            }
+
+            @Override
+            public void stop() throws Exception {
+                http2Client.stop();
+            }
+        });
         return http2Client;
     }
 }

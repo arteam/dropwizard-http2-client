@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterables;
 import org.eclipse.jetty.alpn.client.ALPNClientConnectionFactory;
+import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http2.client.HTTP2ClientConnectionFactory;
 import org.eclipse.jetty.io.ByteBufferPool;
 import org.eclipse.jetty.io.ClientConnectionFactory;
@@ -19,6 +20,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+/**
+ * Date: 11/26/15
+ * Time: 10:10 AM
+ * <p>
+ * A builder for {@link SslClientConnectionFactory} with {@link ALPNClientConnectionFactory}
+ * and {@link HTTP2ClientConnectionFactory}.
+ * <p>
+ * <p>Provides <b>h2</b> transport for {@link HttpClient}.</p>
+ *
+ * @author Artem Prigoda
+ */
 @JsonTypeName("http2")
 public class Http2ClientConnectionFactoryBuilder implements ClientConnectionFactoryBuilder {
 
@@ -206,6 +218,11 @@ public class Http2ClientConnectionFactoryBuilder implements ClientConnectionFact
         return new SslClientConnectionFactory(buildSslContextFactory(), byteBufferPool, executor, alpn);
     }
 
+    /**
+     * Builds a {@link SslClientConnectionFactory} instance from an external configuration.
+     *
+     * @return a configured {@link SslClientConnectionFactory}
+     */
     protected SslContextFactory buildSslContextFactory() {
         final SslContextFactory factory = new SslContextFactory();
         if (keyStorePath != null) {

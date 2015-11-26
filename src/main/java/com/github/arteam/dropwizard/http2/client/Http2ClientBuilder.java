@@ -1,10 +1,20 @@
 package com.github.arteam.dropwizard.http2.client;
 
-
 import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http2.client.HTTP2Client;
+import org.eclipse.jetty.io.ClientConnectionFactory;
 
+/**
+ * Date: 11/26/15
+ * Time: 10:22 AM
+ * <p>
+ * A builder for {@link HTTP2Client}. It builds an instance from an external
+ * configuration and ties it to Dropwizard environment.
+ *
+ * @author Artem Prigoda
+ */
 public class Http2ClientBuilder {
 
     private Environment environment;

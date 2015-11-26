@@ -4,7 +4,17 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
 import org.eclipse.jetty.http2.client.HTTP2ClientConnectionFactory;
 import org.eclipse.jetty.io.ClientConnectionFactory;
+import org.eclipse.jetty.client.HttpClient;
 
+/**
+ * Date: 11/26/15
+ * Time: 10:10 AM
+ * <p>
+ * A builder for {@link HTTP2ClientConnectionFactory}. Provides
+ * <b>h2c</b> transport for {@link HttpClient}.
+ *
+ * @author Artem Prigoda
+ */
 @JsonTypeName("http2c")
 public class Http2ClearClientConnectionFactoryBuilder implements ClientConnectionFactoryBuilder {
 

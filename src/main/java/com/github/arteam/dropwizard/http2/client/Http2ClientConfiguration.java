@@ -2,17 +2,14 @@ package com.github.arteam.dropwizard.http2.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import io.dropwizard.util.Duration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Arrays;
-import java.util.List;
 
 /**
- * The external configuration class for {@link Http2ClientBuilder}.
+ * The external configuration class for {@link JettyHttpClientBuilder}.
  */
 public class Http2ClientConfiguration {
 
@@ -27,7 +24,7 @@ public class Http2ClientConfiguration {
 
     @NotNull
     @Valid
-    private ClientConnectionFactoryBuilder connectionFactoryBuilder = new Http2ClientConnectionFactoryBuilder();
+    private ClientTransportFactory connectionFactoryBuilder = new Http2ClientTransportFactory();
 
     @JsonProperty
     public Duration getConnectionTimeout() {
@@ -60,12 +57,12 @@ public class Http2ClientConfiguration {
     }
 
     @JsonProperty("connectionFactory")
-    public ClientConnectionFactoryBuilder getConnectionFactoryBuilder() {
+    public ClientTransportFactory getConnectionFactoryBuilder() {
         return connectionFactoryBuilder;
     }
 
     @JsonProperty("connectionFactory")
-    public void setConnectionFactoryBuilder(ClientConnectionFactoryBuilder connectionFactoryBuilder) {
+    public void setConnectionFactoryBuilder(ClientTransportFactory connectionFactoryBuilder) {
         this.connectionFactoryBuilder = connectionFactoryBuilder;
     }
 

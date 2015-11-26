@@ -1,1 +1,1 @@
-com.github.arteam.dropwizard.http2.client.ClientConnectionFactoryBuilder
+com.github.arteam.dropwizard.http2.client.ClientTransportFactory

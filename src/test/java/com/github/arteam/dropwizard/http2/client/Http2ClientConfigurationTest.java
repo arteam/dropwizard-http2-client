@@ -37,8 +37,8 @@ public class Http2ClientConfigurationTest {
         assertThat(conf.getConnectionTimeout()).isEqualTo(Duration.seconds(1));
 
         assertThat(conf.getConnectionFactoryBuilder())
-                .isInstanceOf(Http2ClientConnectionFactoryBuilder.class);
-        final Http2ClientConnectionFactoryBuilder http2 = (Http2ClientConnectionFactoryBuilder)
+                .isInstanceOf(Http2ClientTransportFactory.class);
+        final Http2ClientTransportFactory http2 = (Http2ClientTransportFactory)
                 conf.getConnectionFactoryBuilder();
 
         assertThat(http2.getProtocols()).containsOnly("h2", "h2-17", "h2-16", "h2-15", "h2-14");
@@ -62,6 +62,6 @@ public class Http2ClientConfigurationTest {
         assertThat(conf.getConnectionTimeout()).isEqualTo(Duration.milliseconds(600));
 
         assertThat(conf.getConnectionFactoryBuilder())
-                .isInstanceOf(Http2ClearClientConnectionFactoryBuilder.class);
+                .isInstanceOf(Http2ClearClientTransportFactory.class);
     }
 }

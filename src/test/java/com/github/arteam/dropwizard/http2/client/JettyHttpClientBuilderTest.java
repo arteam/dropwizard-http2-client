@@ -52,7 +52,7 @@ public class JettyHttpClientBuilderTest {
         configuration.setConnectionFactoryBuilder(new Http2ClearClientTransportFactory());
         final HttpClient client = new JettyHttpClientBuilder(environment)
                 .using(configuration)
-                .build();
+                .build("");
         String response = client.GET("http://127.0.0.1:8445/hello-world")
                 .getContentAsString();
         System.out.println(response);

@@ -1,5 +1,6 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.dropwizard.jackson.Discoverable;
 import org.eclipse.jetty.client.HttpClient;
@@ -24,5 +25,5 @@ public interface ClientTransportFactory extends Discoverable {
     @Nullable
     SslContextFactory sslContextFactory();
 
-    HttpClientTransport httpClientTransport();
+    HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name);
 }

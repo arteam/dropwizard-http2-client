@@ -1,5 +1,6 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
@@ -284,14 +285,14 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
     }
 
     @Override
-    public HttpClientTransport httpClientTransport() {
+    public HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name) {
         // If we don't specify a connection factory, an SSL connection factory with
         // ALPN and HTTP/2 will be used by default. The configured SslContextFactory
         // will be passed from HttpClient.
         HTTP2Client http2Client = new HTTP2Client();
         http2Client.setExecutor(executor);
         http2Client.setByteBufferPool(byteBufferPool);
-        return new HttpClientTransportOverHTTP2(http2Client);
+        return new InstrumentedHttpClientTransportOverHttp2(http2Client, metricRegistry, name);
     }
 
     @Override

@@ -26,11 +26,16 @@ public class JettyHttpClientBuilder {
         return this;
     }
 
-    public HttpClient build() {
+    public HttpClient build(String name) {
         ClientTransportFactory connectionFactoryBuilder = configuration.getConnectionFactoryBuilder();
-        HttpClient httpClient = new HttpClient(connectionFactoryBuilder.httpClientTransport(),
+        HttpClient httpClient = new HttpClient(
+                connectionFactoryBuilder.httpClientTransport(environment.metrics(), name),
                 connectionFactoryBuilder.sslContextFactory());
         environment.lifecycle().manage(httpClient);
         return httpClient;
+    }
+
+    public HttpClient build() {
+        return build("");
     }
 }

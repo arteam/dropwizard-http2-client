@@ -1,5 +1,6 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
 import org.eclipse.jetty.client.HttpClientTransport;
@@ -30,11 +31,11 @@ public class Http2ClearClientTransportFactory implements ClientTransportFactory 
     }
 
     @Override
-    public HttpClientTransport httpClientTransport() {
+    public HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name) {
         // Explicitly set the HTTP/2 connection factory, because we don't need SSL and ALPN.
         final HTTP2Client client = new HTTP2Client();
         client.setClientConnectionFactory(new HTTP2ClientConnectionFactory());
-        return new HttpClientTransportOverHTTP2(client);
+        return new InstrumentedHttpClientTransportOverHttp2(client, metricRegistry, name);
     }
 
     @Override

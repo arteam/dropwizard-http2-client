@@ -31,7 +31,7 @@ import java.util.concurrent.Executor;
  *
  * @author Artem Prigoda
  */
-@JsonTypeName("http2")
+@JsonTypeName("h2")
 public class Http2ClientTransportFactory implements ClientTransportFactory {
 
     private Executor executor = new QueuedThreadPool();

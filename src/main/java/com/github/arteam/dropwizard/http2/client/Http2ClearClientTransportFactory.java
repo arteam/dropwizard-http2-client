@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
  *
  * @author Artem Prigoda
  */
-@JsonTypeName("http2c")
+@JsonTypeName("h2c")
 public class Http2ClearClientTransportFactory implements ClientTransportFactory {
 
     @Override

@@ -1,7 +1,7 @@
 connectionTimeout: 1s
 idleTimeout: 5m
 connectionFactory:
-    type : 'http2'
+    type : 'h2'
     keyStorePath:       client.jks
     keyStorePassword:   http2_client
     trustStorePath:     servers.jks

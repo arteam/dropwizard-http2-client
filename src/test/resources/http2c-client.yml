@@ -1,4 +1,4 @@
 connectionTimeout: 600ms
 idleTimeout: 3m
 connectionFactory:
-  type : 'http2c'
+  type : 'h2c'

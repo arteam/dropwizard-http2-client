@@ -224,16 +224,9 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
             factory.setKeyStorePath(keyStorePath);
         }
 
-        if (keyStoreType.startsWith("Windows-")) {
-            try {
-                final KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-                keyStore.load(null, null);
-                factory.setKeyStore(keyStore);
-            } catch (Exception e) {
-                throw new IllegalStateException("Windows key store not supported", e);
-            }
-        } else {
-            factory.setKeyStoreType(keyStoreType);
+        factory.setKeyStoreType(keyStoreType);
+
+        if (keyStorePassword != null) {
             factory.setKeyStorePassword(keyStorePassword);
         }
 
@@ -241,23 +234,15 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
             factory.setKeyStoreProvider(keyStoreProvider);
         }
 
-        if (trustStoreType.startsWith("Windows-")) {
-            try {
-                final KeyStore trustStore = KeyStore.getInstance(trustStoreType);
-                trustStore.load(null, null);
-                factory.setTrustStore(trustStore);
-            } catch (Exception e) {
-                throw new IllegalStateException("Windows trust store not supported", e);
-            }
-        } else {
-            if (trustStorePath != null) {
-                factory.setTrustStorePath(trustStorePath);
-            }
-            if (trustStorePassword != null) {
-                factory.setTrustStorePassword(trustStorePassword);
-            }
-            factory.setTrustStoreType(trustStoreType);
+        if (trustStorePath != null) {
+            factory.setTrustStorePath(trustStorePath);
         }
+
+        if (trustStorePassword != null) {
+            factory.setTrustStorePassword(trustStorePassword);
+        }
+
+        factory.setTrustStoreType(trustStoreType);
 
         if (trustStoreProvider != null) {
             factory.setTrustStoreProvider(trustStoreProvider);

@@ -4,6 +4,7 @@ import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
@@ -52,9 +53,9 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
     private String trustStoreType = "JKS";
     private String trustStoreProvider;
 
-    private List<String> supportedProtocols;
+    private List<String> supportedProtocols = ImmutableList.of("TLSv1.2");
     private List<String> excludedProtocols;
-    private List<String> supportedCipherSuites;
+    private List<String> supportedCipherSuites = ImmutableList.of("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
     private List<String> excludedCipherSuites;
 
     private boolean validateCerts = true;

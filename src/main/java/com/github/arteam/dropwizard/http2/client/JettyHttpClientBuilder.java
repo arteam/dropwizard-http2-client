@@ -15,7 +15,7 @@ import org.eclipse.jetty.client.HttpClient;
 public class JettyHttpClientBuilder {
 
     private Environment environment;
-    private Http2ClientConfiguration configuration;
+    private Http2ClientConfiguration configuration = new Http2ClientConfiguration();
 
     public JettyHttpClientBuilder(Environment environment) {
         this.environment = environment;

@@ -31,6 +31,8 @@ public class JettyHttpClientBuilder {
         HttpClient httpClient = new HttpClient(
                 connectionFactoryBuilder.httpClientTransport(environment.metrics(), name),
                 connectionFactoryBuilder.sslContextFactory());
+        httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
+        httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
         environment.lifecycle().manage(httpClient);
         return httpClient;
     }

@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Artem Prigoda
  */
-public class JettyHttpClientBuilderTest {
+public class Http2ClientIntegrationTest {
 
     static {
         BootstrapLogging.bootstrap();

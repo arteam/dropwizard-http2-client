@@ -2,6 +2,8 @@ package com.github.arteam.dropwizard.http2.client;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClearClientTransportFactory;
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.logging.BootstrapLogging;
 import io.dropwizard.setup.Environment;
@@ -13,10 +15,6 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.junit.*;
 import org.mockito.Mockito;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;

@@ -1,6 +1,8 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
+import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
 import com.google.common.base.MoreObjects;
 import io.dropwizard.util.Duration;
 

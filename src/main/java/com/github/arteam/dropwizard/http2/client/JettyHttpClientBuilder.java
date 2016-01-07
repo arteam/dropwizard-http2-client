@@ -1,5 +1,6 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
 import com.google.common.base.Strings;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.client.HttpClient;

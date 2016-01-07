@@ -1,7 +1,8 @@
-package com.github.arteam.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.github.arteam.dropwizard.http2.client.InstrumentedHttpClientTransportOverHttp2;
 import com.google.common.base.MoreObjects;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.http2.client.HTTP2Client;

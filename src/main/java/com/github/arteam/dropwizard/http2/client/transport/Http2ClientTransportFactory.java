@@ -1,8 +1,10 @@
-package com.github.arteam.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.github.arteam.dropwizard.http2.client.InstrumentedHttpClientTransportOverHttp2;
+import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -18,7 +20,6 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
-import java.security.KeyStore;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;

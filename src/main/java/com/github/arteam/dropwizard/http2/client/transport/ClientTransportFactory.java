@@ -1,4 +1,4 @@
-package com.github.arteam.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

@@ -1,5 +1,7 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClearClientTransportFactory;
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import com.google.common.base.Throwables;
 import com.google.common.io.Resources;
 import io.dropwizard.configuration.ConfigurationFactory;

@@ -1,13 +1,12 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
+import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import com.google.common.base.MoreObjects;
 import io.dropwizard.util.Duration;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -15,19 +14,31 @@ import javax.validation.constraints.NotNull;
  */
 public class Http2ClientConfiguration {
 
+    /**
+     * The max waiting time to connect to a destination
+     */
     @NotNull
     private Duration connectionTimeout = Duration.milliseconds(500);
 
+    /**
+     * The max time a connection can be idle. It's the request timeout as well.
+     */
     @NotNull
     private Duration idleTimeout = Duration.minutes(1);
 
-    @Min(1)
-    private int selectors = 1;
-
+    /**
+     * Should the client save cookies
+     */
     private boolean storeCookies = false;
 
+    /**
+     * Should the client follow redirects
+     */
     private boolean followRedirects = true;
 
+    /**
+     * A factory for providing the transport and SSL configuration for the client
+     */
     @NotNull
     @Valid
     private ClientTransportFactory connectionFactoryBuilder = new Http2ClientTransportFactory();
@@ -50,16 +61,6 @@ public class Http2ClientConfiguration {
     @JsonProperty
     public void setIdleTimeout(Duration idleTimeout) {
         this.idleTimeout = idleTimeout;
-    }
-
-    @JsonProperty
-    public int getSelectors() {
-        return selectors;
-    }
-
-    @JsonProperty
-    public void setSelectors(int selectors) {
-        this.selectors = selectors;
     }
 
     @JsonProperty("connectionFactory")
@@ -95,8 +96,8 @@ public class Http2ClientConfiguration {
         return MoreObjects.toStringHelper(this)
                 .add("connectionTimeout", connectionTimeout)
                 .add("idleTimeout", idleTimeout)
-                .add("selectors", selectors)
                 .add("storeCookies", storeCookies)
+                .add("followRedirects", followRedirects)
                 .add("connectionFactoryBuilder", connectionFactoryBuilder)
                 .toString();
     }

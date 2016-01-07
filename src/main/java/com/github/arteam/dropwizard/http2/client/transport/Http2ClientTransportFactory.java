@@ -279,7 +279,7 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper("http2")
+        return MoreObjects.toStringHelper("h2")
                 .add("protocols", protocols)
                 .add("keyStorePath", keyStorePath)
                 .add("keyStorePassword", keyStorePassword)

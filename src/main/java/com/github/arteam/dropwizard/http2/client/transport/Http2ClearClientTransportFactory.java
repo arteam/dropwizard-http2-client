@@ -42,7 +42,7 @@ public class Http2ClearClientTransportFactory implements ClientTransportFactory 
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper("http2c")
+        return MoreObjects.toStringHelper("h2c")
                 .toString();
     }
 }

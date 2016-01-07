@@ -11,6 +11,8 @@ import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
 import org.eclipse.jetty.http2.client.http.HttpConnectionOverHTTP2;
 import org.eclipse.jetty.http2.client.http.HttpDestinationOverHTTP2;
 
+import javax.annotation.Nullable;
+
 /**
  * Date: 11/29/15
  * Time: 10:26 PM
@@ -23,10 +25,13 @@ import org.eclipse.jetty.http2.client.http.HttpDestinationOverHTTP2;
 class InstrumentedHttpClientTransportOverHttp2 extends HttpClientTransportOverHTTP2 {
 
     private final MetricRegistry metricRegistry;
+
+    @Nullable
     private final String name;
     private HttpClient client;
 
-    public InstrumentedHttpClientTransportOverHttp2(HTTP2Client client, MetricRegistry metricRegistry, String name) {
+    public InstrumentedHttpClientTransportOverHttp2(HTTP2Client client, MetricRegistry metricRegistry,
+                                                    @Nullable String name) {
         super(client);
         this.metricRegistry = metricRegistry;
         this.name = name;

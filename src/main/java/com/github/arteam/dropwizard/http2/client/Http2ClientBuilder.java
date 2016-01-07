@@ -8,6 +8,8 @@ import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.util.HttpCookieStore;
 
+import javax.annotation.Nullable;
+
 /**
  * Date: 11/26/15
  * Time: 10:22 AM
@@ -31,7 +33,7 @@ public class Http2ClientBuilder {
         return this;
     }
 
-    public HttpClient build(String name) {
+    public HttpClient build(@Nullable String name) {
         ClientTransportFactory connectionFactoryBuilder = configuration.getConnectionFactoryBuilder();
         HttpClient httpClient = new HttpClient(
                 connectionFactoryBuilder.httpClientTransport(environment.metrics(), name),
@@ -51,6 +53,6 @@ public class Http2ClientBuilder {
     }
 
     public HttpClient build() {
-        return build("");
+        return build(null);
     }
 }

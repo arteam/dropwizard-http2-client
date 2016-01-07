@@ -37,5 +37,5 @@ public interface ClientTransportFactory extends Discoverable {
      * @param name           the name of the client
      * @return a configured {@link HttpClientTransport}
      */
-    HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name);
+    HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, @Nullable String name);
 }

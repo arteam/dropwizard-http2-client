@@ -33,7 +33,7 @@ public class Http2ClearClientTransportFactory implements ClientTransportFactory 
     }
 
     @Override
-    public HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name) {
+    public HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, @Nullable String name) {
         // Explicitly set the HTTP/2 connection factory, because we don't need SSL and ALPN.
         final HTTP2Client client = new HTTP2Client();
         client.setClientConnectionFactory(new HTTP2ClientConnectionFactory());

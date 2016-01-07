@@ -22,6 +22,8 @@ public class Http2ClientConfiguration {
     @Min(1)
     private int selectors = 1;
 
+    private boolean storeCookies = false;
+
     @NotNull
     @Valid
     private ClientTransportFactory connectionFactoryBuilder = new Http2ClientTransportFactory();
@@ -66,12 +68,23 @@ public class Http2ClientConfiguration {
         this.connectionFactoryBuilder = connectionFactoryBuilder;
     }
 
+    @JsonProperty
+    public boolean isStoreCookies() {
+        return storeCookies;
+    }
+
+    @JsonProperty
+    public void setStoreCookies(boolean storeCookies) {
+        this.storeCookies = storeCookies;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("connectionTimeout", connectionTimeout)
                 .add("idleTimeout", idleTimeout)
                 .add("selectors", selectors)
+                .add("storeCookies", storeCookies)
                 .add("connectionFactoryBuilder", connectionFactoryBuilder)
                 .toString();
     }

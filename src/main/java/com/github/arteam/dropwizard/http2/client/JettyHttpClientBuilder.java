@@ -5,6 +5,7 @@ import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.util.HttpCookieStore;
 
 /**
  * Date: 11/26/15
@@ -36,8 +37,12 @@ public class JettyHttpClientBuilder {
                 connectionFactoryBuilder.sslContextFactory());
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
+        httpClient.setCookieStore(new HttpCookieStore.Empty());
         if (!Strings.isNullOrEmpty(name)) {
             httpClient.setUserAgentField(new HttpField(HttpHeader.USER_AGENT, name));
+        }
+        if (!configuration.isStoreCookies()) {
+            httpClient.setCookieStore(new HttpCookieStore.Empty());
         }
         environment.lifecycle().manage(httpClient);
         return httpClient;

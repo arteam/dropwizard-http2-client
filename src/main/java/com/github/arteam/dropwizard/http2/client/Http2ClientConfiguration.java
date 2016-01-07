@@ -24,6 +24,8 @@ public class Http2ClientConfiguration {
 
     private boolean storeCookies = false;
 
+    private boolean followRedirects = true;
+
     @NotNull
     @Valid
     private ClientTransportFactory connectionFactoryBuilder = new Http2ClientTransportFactory();
@@ -76,6 +78,14 @@ public class Http2ClientConfiguration {
     @JsonProperty
     public void setStoreCookies(boolean storeCookies) {
         this.storeCookies = storeCookies;
+    }
+
+    public boolean isFollowRedirects() {
+        return followRedirects;
+    }
+
+    public void setFollowRedirects(boolean followRedirects) {
+        this.followRedirects = followRedirects;
     }
 
     @Override

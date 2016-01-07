@@ -37,6 +37,7 @@ public class JettyHttpClientBuilder {
                 connectionFactoryBuilder.sslContextFactory());
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
+        httpClient.setFollowRedirects(configuration.isFollowRedirects());
         httpClient.setCookieStore(new HttpCookieStore.Empty());
         if (!Strings.isNullOrEmpty(name)) {
             httpClient.setUserAgentField(new HttpField(HttpHeader.USER_AGENT, name));

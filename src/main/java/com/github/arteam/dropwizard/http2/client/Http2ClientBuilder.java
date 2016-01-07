@@ -17,16 +17,16 @@ import org.eclipse.jetty.util.HttpCookieStore;
  *
  * @author Artem Prigoda
  */
-public class JettyHttpClientBuilder {
+public class Http2ClientBuilder {
 
     private Environment environment;
     private Http2ClientConfiguration configuration = new Http2ClientConfiguration();
 
-    public JettyHttpClientBuilder(Environment environment) {
+    public Http2ClientBuilder(Environment environment) {
         this.environment = environment;
     }
 
-    public JettyHttpClientBuilder using(Http2ClientConfiguration configuration) {
+    public Http2ClientBuilder using(Http2ClientConfiguration configuration) {
         this.configuration = configuration;
         return this;
     }

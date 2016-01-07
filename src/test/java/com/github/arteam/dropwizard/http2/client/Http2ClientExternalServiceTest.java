@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.logging.BootstrapLogging;
 import io.dropwizard.setup.Environment;
-import org.assertj.core.api.Assertions;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.junit.After;
@@ -33,7 +32,7 @@ public class Http2ClientExternalServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        httpClient = new JettyHttpClientBuilder(environment).build();
+        httpClient = new Http2ClientBuilder(environment).build();
         for (LifeCycle managedObject : environment.lifecycle().getManagedObjects()) {
             managedObject.start();
         }

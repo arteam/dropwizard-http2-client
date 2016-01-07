@@ -11,7 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * The external configuration class for {@link JettyHttpClientBuilder}.
+ * The external configuration class for {@link Http2ClientBuilder}.
  */
 public class Http2ClientConfiguration {
 

@@ -71,7 +71,7 @@ public class Http2ClientIntegrationTest {
     public void testH2c() throws Exception {
         Http2ClientConfiguration configuration = new Http2ClientConfiguration();
         configuration.setConnectionFactoryBuilder(new Http2ClearClientTransportFactory());
-        final HttpClient client = new JettyHttpClientBuilder(environment)
+        final HttpClient client = new Http2ClientBuilder(environment)
                 .using(configuration)
                 .build();
         String response = client.GET(String.format("http://127.0.0.1:%d/application/greet", h2.getLocalPort()))
@@ -89,7 +89,7 @@ public class Http2ClientIntegrationTest {
         h2transport.setValidatePeers(false);
         h2conf.setConnectionFactoryBuilder(h2transport);
 
-        HttpClient client = new JettyHttpClientBuilder(environment)
+        HttpClient client = new Http2ClientBuilder(environment)
                 .using(h2conf)
                 .build();
         String response = client.GET(String.format("https://127.0.0.1:%d/application/greet", h2.getLocalPort()))

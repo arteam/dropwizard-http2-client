@@ -74,7 +74,7 @@ public class Http2ClientIntegrationTest {
         final HttpClient client = new Http2ClientBuilder(environment)
                 .using(configuration)
                 .build();
-        String response = client.GET(String.format("http://127.0.0.1:%d/application/greet", h2.getLocalPort()))
+        String response = client.GET(String.format("http://127.0.0.1:%d/application/greet", h2c.getLocalPort()))
                 .getContentAsString();
         assertThat(objectMapper.readTree(response))
                 .isEqualTo(objectMapper.readTree(FixtureHelpers.fixture("server_response.json")));

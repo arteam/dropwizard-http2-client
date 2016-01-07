@@ -4,13 +4,19 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpDestination;
+import org.eclipse.jetty.client.HttpExchange;
 import org.eclipse.jetty.client.Origin;
 import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
+import org.eclipse.jetty.http2.client.http.HttpConnectionOverHTTP2;
+import org.eclipse.jetty.http2.client.http.HttpDestinationOverHTTP2;
 
 /**
  * Date: 11/29/15
  * Time: 10:26 PM
+ * <p>
+ * An {@link HttpClientTransportOverHTTP2} implementation that tracks HTTP/2 calls
+ * timings to the provided {@link MetricRegistry}.
  *
  * @author Artem Prigoda
  */
@@ -34,7 +40,15 @@ class InstrumentedHttpClientTransportOverHttp2 extends HttpClientTransportOverHT
 
     @Override
     public HttpDestination newHttpDestination(Origin origin) {
-        Timer timer = metricRegistry.timer(MetricRegistry.name(HTTP2Client.class, name, origin.getAddress().getHost()));
-        return new InstrumentedHttpDestinationOverHTTP2(client, origin, timer);
+        return new HttpDestinationOverHTTP2(client, origin) {
+            @Override
+            protected void send(HttpConnectionOverHTTP2 connection, HttpExchange exchange) {
+                Timer timer = metricRegistry.timer(MetricRegistry.name(HTTP2Client.class, name,
+                        origin.getAddress().getHost()));
+                try (Timer.Context context = timer.time()) {
+                    super.send(connection, exchange);
+                }
+            }
+        };
     }
 }

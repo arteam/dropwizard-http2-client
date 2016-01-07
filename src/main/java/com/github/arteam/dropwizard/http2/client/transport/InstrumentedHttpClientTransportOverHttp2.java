@@ -1,4 +1,4 @@
-package com.github.arteam.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
@@ -14,7 +14,7 @@ import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
  *
  * @author Artem Prigoda
  */
-public class InstrumentedHttpClientTransportOverHttp2 extends HttpClientTransportOverHTTP2 {
+class InstrumentedHttpClientTransportOverHttp2 extends HttpClientTransportOverHTTP2 {
 
     private final MetricRegistry metricRegistry;
     private final String name;

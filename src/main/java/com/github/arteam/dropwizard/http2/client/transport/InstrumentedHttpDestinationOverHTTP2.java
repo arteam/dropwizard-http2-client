@@ -1,4 +1,4 @@
-package com.github.arteam.dropwizard.http2.client;
+package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.Timer;
 import org.eclipse.jetty.client.HttpClient;
@@ -13,7 +13,7 @@ import org.eclipse.jetty.http2.client.http.HttpDestinationOverHTTP2;
  *
  * @author Artem Prigoda
  */
-public class InstrumentedHttpDestinationOverHTTP2 extends HttpDestinationOverHTTP2 {
+class InstrumentedHttpDestinationOverHTTP2 extends HttpDestinationOverHTTP2 {
 
     private Timer timer;
 

@@ -16,8 +16,10 @@ import javax.annotation.Nullable;
  * Date: 11/26/15
  * Time: 10:10 AM
  * <p>
- * A factory for {@link HttpClientTransportOverHTTP2}. Provides
- * <b>h2c</b> transport for {@link HttpClient}.
+ * A {@link ClientTransportFactory} implementation that provides {@link HttpClientTransport}
+ * as HTTP/2 and no SSL support.
+ * <p>
+ * Implements <b>h2c</b> transport for {@link HttpClient}.
  *
  * @author Artem Prigoda
  */

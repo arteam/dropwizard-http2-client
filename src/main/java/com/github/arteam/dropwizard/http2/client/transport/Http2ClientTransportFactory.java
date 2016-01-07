@@ -26,8 +26,10 @@ import java.util.concurrent.Executor;
  * Date: 11/26/15
  * Time: 10:10 AM
  * <p>
- * A builder for {@link HttpClientTransportOverHTTP2}. Provides <b>h2</b>
- * transport for {@link HttpClient}.
+ * A {@link ClientTransportFactory} implementation that provides {@link HttpClientTransport}
+ * as HTTP/2 and {@link SslContextFactory} from an external configuration.
+ * <p>
+ * Implements <b>h2</b> transport for {@link HttpClient}.
  *
  * @author Artem Prigoda
  */
@@ -211,11 +213,6 @@ public class Http2ClientTransportFactory implements ClientTransportFactory {
         this.protocols = protocols;
     }
 
-    /**
-     * Builds a {@link SslClientConnectionFactory} instance from an external configuration.
-     *
-     * @return a configured {@link SslClientConnectionFactory}
-     */
     @Nullable
     public SslContextFactory sslContextFactory() {
         SslContextFactory factory = new SslContextFactory();

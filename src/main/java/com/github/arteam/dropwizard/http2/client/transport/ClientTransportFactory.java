@@ -22,8 +22,20 @@ import javax.annotation.Nullable;
         defaultImpl = Http2ClientTransportFactory.class)
 public interface ClientTransportFactory extends Discoverable {
 
+    /**
+     * Configures the SSL context for an HTTP/2 client.
+     *
+     * @return a configured {@link SslContextFactory}
+     */
     @Nullable
     SslContextFactory sslContextFactory();
 
+    /**
+     * Configures the transport implementation for an HTTP/2 client
+     *
+     * @param metricRegistry the environment metric registry
+     * @param name           the name of the client
+     * @return a configured {@link HttpClientTransport}
+     */
     HttpClientTransport httpClientTransport(MetricRegistry metricRegistry, String name);
 }

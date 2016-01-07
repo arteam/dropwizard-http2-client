@@ -1,7 +1,10 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.google.common.base.Strings;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.http.HttpField;
+import org.eclipse.jetty.http.HttpHeader;
 
 /**
  * Date: 11/26/15
@@ -33,6 +36,9 @@ public class JettyHttpClientBuilder {
                 connectionFactoryBuilder.sslContextFactory());
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
+        if (!Strings.isNullOrEmpty(name)) {
+            httpClient.setUserAgentField(new HttpField(HttpHeader.USER_AGENT, name));
+        }
         environment.lifecycle().manage(httpClient);
         return httpClient;
     }

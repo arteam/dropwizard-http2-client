@@ -35,9 +35,8 @@ public class Http2ClientBuilder {
 
     public HttpClient build(@Nullable String name) {
         ClientTransportFactory connectionFactoryBuilder = configuration.getConnectionFactoryBuilder();
-        HttpClient httpClient = new HttpClient(
-                connectionFactoryBuilder.httpClientTransport(environment.metrics(), name),
-                connectionFactoryBuilder.sslContextFactory());
+        HttpClient httpClient = new InstrumentedHttpClient(connectionFactoryBuilder.httpClientTransport(),
+                connectionFactoryBuilder.sslContextFactory(), environment.metrics(), name);
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
         httpClient.setFollowRedirects(configuration.isFollowRedirects());

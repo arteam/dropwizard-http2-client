@@ -2,10 +2,7 @@ package com.github.arteam.dropwizard.http2.client.transport;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
-import org.eclipse.jetty.client.HttpClient;
-import org.eclipse.jetty.client.HttpDestination;
-import org.eclipse.jetty.client.HttpExchange;
-import org.eclipse.jetty.client.Origin;
+import org.eclipse.jetty.client.*;
 import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
 import org.eclipse.jetty.http2.client.http.HttpConnectionOverHTTP2;
@@ -47,11 +44,11 @@ class InstrumentedHttpClientTransportOverHttp2 extends HttpClientTransportOverHT
     public HttpDestination newHttpDestination(Origin origin) {
         return new HttpDestinationOverHTTP2(client, origin) {
             @Override
-            protected void send(HttpConnectionOverHTTP2 connection, HttpExchange exchange) {
+            protected SendFailure send(HttpConnectionOverHTTP2 connection, HttpExchange exchange) {
                 Timer timer = metricRegistry.timer(MetricRegistry.name(HTTP2Client.class, name,
                         origin.getAddress().getHost()));
                 try (Timer.Context context = timer.time()) {
-                    super.send(connection, exchange);
+                    return super.send(connection, exchange);
                 }
             }
         };

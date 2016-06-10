@@ -4,7 +4,7 @@ import com.github.arteam.dropwizard.http2.client.transport.Http2ClearClientTrans
 import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import com.google.common.base.Throwables;
 import com.google.common.io.Resources;
-import io.dropwizard.configuration.ConfigurationFactory;
+import io.dropwizard.configuration.YamlConfigurationFactory;
 import io.dropwizard.jackson.Jackson;
 import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.logging.BootstrapLogging;
@@ -23,7 +23,7 @@ public class Http2ClientConfigurationTest {
 
     private Http2ClientConfiguration load(String configLocation) {
         try {
-            return new ConfigurationFactory<>(Http2ClientConfiguration.class,
+            return new YamlConfigurationFactory<>(Http2ClientConfiguration.class,
                     Validators.newValidator(),
                     Jackson.newObjectMapper(), "dw-http2-client")
                     .build(new File(Resources.getResource(configLocation).toURI()));

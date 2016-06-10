@@ -5,4 +5,4 @@ server:
       port: 0
       keyStorePassword: 'h2_server'
       validateCerts: false
-      trustStorePath: '/etc/ssl/certs/java/cacerts'
+      validatePeers: false

@@ -8,7 +8,8 @@ Dropwizard Integration with the Jetty HTTP/1.1 and HTTP/2 client
 * Instruments the client and register the metrics in the Dropwizard's `MetricsRegistry`
 * The client is managed by the Dropwizard's environment and correctly cleans resources.
 
-Example of the usage:
+## Example of the usage:
+
 ```yaml
 h2Client:
   connectionTimeout: 1s
@@ -34,4 +35,28 @@ HttpClient httpClient = new Http2ClientBuilder(environment)
                 .using(configuration.getH2Client())
                 .build("dropwizard-http2-golang");
 ```
+
+## Maven dependency
+
+```xml
+<dependency>
+    <groupId>com.github.arteam</groupId>
+    <artifactId>dropwizard-http2-client</artifactId>
+    <version>0.1</version>
+</dependency>
+```
+
+## Availability
+
+Artifact are available in the [JCenter] (https://bintray.com/arteam/maven/jdit) repository
+
+````xml
+<repositories>
+    <repository>
+        <id>jcenter</id>
+        <name>bintray</name>
+        <url>http://jcenter.bintray.com</url>
+  </repository>
+</repositories>
+````
 

@@ -26,7 +26,7 @@ public Http2ClientConfiguration getH2Client() {
 
 @JsonProperty
 public void setH2Client(Http2ClientConfiguration h2Client) {
-        this.h2Client = h2Client;
+    this.h2Client = h2Client;
 }
 ```
 
@@ -34,6 +34,34 @@ public void setH2Client(Http2ClientConfiguration h2Client) {
 HttpClient httpClient = new Http2ClientBuilder(environment)
                 .using(configuration.getH2Client())
                 .build("dropwizard-http2-golang");
+```
+
+## Examples of configurations
+
+* HTTP/2
+
+```yml
+connectionTimeout: 1s
+idleTimeout: 5m
+connectionFactory:
+  type : h2
+  keyStorePath:       client.jks
+  keyStorePassword:   http2_client
+  trustStorePath:     servers.jks
+  trustStorePassword: http2_server
+  supportedProtocols:
+    - 'TLSv1.2'
+  supportedCipherSuites:
+    - 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'
+```
+
+* HTTP/2 Clear Text
+
+```yml
+connectionTimeout: 600ms
+idleTimeout: 3m
+connectionFactory:
+  type : h2c
 ```
 
 ## Maven dependency

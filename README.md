@@ -1,4 +1,4 @@
-# Dropwizard HTTP/2 client
+# Dropwizard HTTP/2 client [![Build Status](https://travis-ci.org/arteam/dropwizard-http2-client.svg?branch=master)](https://travis-ci.org/arteam/dropwizard-http2-client)
 Dropwizard Integration with the Jetty HTTP/1.1 and HTTP/2 client 
 
 * Provides the ability to configure the client from a Dropwizard config.

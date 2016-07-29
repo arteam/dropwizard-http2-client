@@ -84,6 +84,23 @@ connectionFactory:
 </dependency>
 ```
 
+If you use the Dropwizard BOM in your application, you are forced to declare transitive dependencies:
+```xml
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-client</artifactId>
+    <scope>compile</scope>
+</dependency>
+
+<dependency>
+   <groupId>org.eclipse.jetty.http2</groupId>
+   <artifactId>http2-http-client-transport</artifactId>
+   <scope>compile</scope>
+</dependency>
+```
+
+This will be fixed in future Dropwizard versions.
+
 ## Availability
 
 Artifact are available in the [JCenter] (https://bintray.com/bintray/jcenter) repository

@@ -36,6 +36,15 @@ HttpClient httpClient = new Http2ClientBuilder(environment)
                 .build("dropwizard-http2-golang");
 ```
 
+## Runtime dependencies
+
+Don't forget to add an `alpn-boot` library to JVM’s bootpath:
+```
+-Xbootclasspath/p:/${user.home}/.m2/repository/org/mortbay/jetty/alpn/alpn-boot/${alpn-boot.version}/alpn-boot-${alpn-boot.version}.jar
+```
+
+The correct library version depends on a JVM version. Consult the Jetty ALPN [guide](http://www.eclipse.org/jetty/documentation/current/alpn-chapter.html) for the reference.
+
 ## Examples of configurations
 
 * HTTP/2

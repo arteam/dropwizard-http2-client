@@ -76,7 +76,7 @@ connectionFactory:
 
 ## Availability
 
-Artifact are available in the [JCenter] (https://bintray.com/arteam/maven/jdit) repository
+Artifact are available in the [JCenter] (https://bintray.com/bintray/jcenter) repository
 
 ````xml
 <repositories>

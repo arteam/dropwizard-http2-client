@@ -34,6 +34,7 @@ public void setH2Client(Http2ClientConfiguration h2Client) {
 HttpClient httpClient = new Http2ClientBuilder(environment)
                 .using(configuration.getH2Client())
                 .build("dropwizard-http2-golang");
+# Call `httpClient.start()` if you want to use it before the server starts up.                
 ```
 
 ## Runtime dependencies

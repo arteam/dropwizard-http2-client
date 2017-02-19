@@ -28,7 +28,7 @@ public class Http2ClientConfigurationTest {
                     Jackson.newObjectMapper(), "dw-http2-client")
                     .build(new File(Resources.getResource(configLocation).toURI()));
         } catch (Exception e) {
-            throw Throwables.propagate(e);
+            throw new IllegalArgumentException(e);
         }
     }
 

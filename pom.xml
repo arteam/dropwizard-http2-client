@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.arteam</groupId>
     <artifactId>dropwizard-http2-client</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
 
     <name>Dropwizard Integration with Jetty HTTP/2 client</name>
     <description>Dropwizard Integration with Jetty HTTP/1.1 and HTTP/2 client</description>
@@ -19,7 +18,7 @@
     <scm>
         <developerConnection>scm:git:git@github.com:arteam/dropwizard-http2-client.git</developerConnection>
         <url>https://github.com/arteam/dropwizard-http2-client</url>
-        <tag>HEAD</tag>
+        <tag>dropwizard-http2-client-0.2</tag>
     </scm>
 
     <licenses>

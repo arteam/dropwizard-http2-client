@@ -1,2 +1,4 @@
 com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory
 com.github.arteam.dropwizard.http2.client.transport.Http2ClearClientTransportFactory
+com.github.arteam.dropwizard.http2.client.transport.HttpClientTransportFactory
+com.github.arteam.dropwizard.http2.client.transport.HttpsClientTransportFactory

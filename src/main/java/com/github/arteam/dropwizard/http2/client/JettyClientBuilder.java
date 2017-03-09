@@ -22,16 +22,16 @@ import javax.annotation.Nullable;
  *
  * @author Artem Prigoda
  */
-public class Http2ClientBuilder {
+public class JettyClientBuilder {
 
     private Environment environment;
-    private Http2ClientConfiguration configuration = new Http2ClientConfiguration();
+    private JettyClientConfiguration configuration = new JettyClientConfiguration();
 
-    public Http2ClientBuilder(Environment environment) {
+    public JettyClientBuilder(Environment environment) {
         this.environment = environment;
     }
 
-    public Http2ClientBuilder using(Http2ClientConfiguration configuration) {
+    public JettyClientBuilder using(JettyClientConfiguration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -39,7 +39,7 @@ public class Http2ClientBuilder {
     public HttpClient build(@Nullable String name) {
         ClientTransportFactory connectionFactoryBuilder = configuration.getConnectionFactoryBuilder();
 
-        final NameStrategy naming = NameStrategies.prefixedStrategy(HTTP2Client.class, name, NameStrategies.HOST);
+        final NameStrategy naming = NameStrategies.prefixedStrategy(HttpClient.class, name, NameStrategies.HOST);
         HttpClient httpClient = new InstrumentedHttpClient(connectionFactoryBuilder.httpClientTransport(),
                 connectionFactoryBuilder.sslContextFactory(), environment.metrics(), naming);
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());

@@ -31,10 +31,7 @@ public class GoLangProxyIntegrationTest {
                     .request()
                     .get()
                     .readEntity(String.class);
-            assertThat(content).contains("Method: GET");
-            assertThat(content).contains("Protocol: HTTP/2.0");
-            assertThat(content).contains("Host: http2.golang.org:443");
-            assertThat(content).contains("RequestURI: \"/reqinfo\"");
+            assertThat(content).contains("\"Host\": \"nghttp2.org:443\"");
             now = System.currentTimeMillis();
             if (attempt++ % 5 == 0) { // 5 attempts reuse the same connection
                 Thread.sleep(4000); // Force reopening the connection

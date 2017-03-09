@@ -1,6 +1,6 @@
 # Dropwizard HTTP/2 client
 [![Build Status](https://travis-ci.org/arteam/dropwizard-http2-client.svg?branch=master)](https://travis-ci.org/arteam/dropwizard-http2-client)
-[![Bintray](https://img.shields.io/bintray/v/arteam/maven/dropwizard-http2-client.svg?maxAge=2592000)]()
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.arteam/dropwizard-http2-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.arteam/dropwizard-http2-client)
 
 Dropwizard Integration with the Jetty HTTP/1.1 and HTTP/2 client
 
@@ -80,7 +80,7 @@ connectionFactory:
 <dependency>
     <groupId>com.github.arteam</groupId>
     <artifactId>dropwizard-http2-client</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 </dependency>
 ```
 
@@ -100,18 +100,3 @@ If you use the Dropwizard BOM in your application, you are forced to declare tra
 ```
 
 This will be fixed in future Dropwizard versions.
-
-## Availability
-
-Artifact are available in the [JCenter] (https://bintray.com/bintray/jcenter) repository
-
-````xml
-<repositories>
-    <repository>
-        <id>jcenter</id>
-        <name>bintray</name>
-        <url>http://jcenter.bintray.com</url>
-  </repository>
-</repositories>
-````
-

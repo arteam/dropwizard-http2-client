@@ -1,11 +1,14 @@
 package com.github.arteam.dropwizard.http2.client;
 
+import com.github.arteam.dropwizard.http2.client.names.NameStrategies;
+import com.github.arteam.dropwizard.http2.client.names.NameStrategy;
 import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
 import com.google.common.base.Strings;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.util.HttpCookieStore;
 
 import javax.annotation.Nullable;
@@ -35,8 +38,10 @@ public class Http2ClientBuilder {
 
     public HttpClient build(@Nullable String name) {
         ClientTransportFactory connectionFactoryBuilder = configuration.getConnectionFactoryBuilder();
+
+        final NameStrategy naming = NameStrategies.prefixedStrategy(HTTP2Client.class, name, NameStrategies.HOST);
         HttpClient httpClient = new InstrumentedHttpClient(connectionFactoryBuilder.httpClientTransport(),
-                connectionFactoryBuilder.sslContextFactory(), environment.metrics(), name);
+                connectionFactoryBuilder.sslContextFactory(), environment.metrics(), naming);
         httpClient.setConnectTimeout(configuration.getConnectionTimeout().toMilliseconds());
         httpClient.setIdleTimeout(configuration.getIdleTimeout().toMilliseconds());
         httpClient.setFollowRedirects(configuration.isFollowRedirects());

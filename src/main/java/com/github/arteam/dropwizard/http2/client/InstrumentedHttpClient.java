@@ -1,19 +1,14 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
+import com.github.arteam.dropwizard.http2.client.names.NameStrategy;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.client.HttpConversation;
 import org.eclipse.jetty.client.HttpRequest;
-import org.eclipse.jetty.client.api.ContentResponse;
-import org.eclipse.jetty.client.api.Response;
-import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.net.URI;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 /**
  * An implementation of {@link HttpClient} which saves registers timing of calls
@@ -25,35 +20,27 @@ import java.util.concurrent.TimeoutException;
 public class InstrumentedHttpClient extends HttpClient {
 
     private final MetricRegistry metricRegistry;
-    private final String name;
+    private final NameStrategy nameStrategy;
 
-    public InstrumentedHttpClient(HttpClientTransport transport, SslContextFactory sslContextFactory,
-                                  MetricRegistry metricRegistry, String name) {
+    public InstrumentedHttpClient(
+            HttpClientTransport transport,
+            SslContextFactory sslContextFactory,
+            MetricRegistry metricRegistry,
+            NameStrategy nameStrategy
+    ) {
         super(transport, sslContextFactory);
         this.metricRegistry = metricRegistry;
-        this.name = name;
+        this.nameStrategy = nameStrategy;
     }
 
     @Override
     protected HttpRequest newHttpRequest(HttpConversation conversation, URI uri) {
-        return new HttpRequest(this, conversation, uri) {
-            @Override
-            public ContentResponse send() throws InterruptedException, TimeoutException, ExecutionException {
-                try (Timer.Context context = timer(uri).time()) {
-                    return super.send();
-                }
-            }
-
-            @Override
-            public void send(Response.CompleteListener listener) {
-                try (Timer.Context context = timer(uri).time()) {
-                    super.send(listener);
-                }
-            }
-        };
-    }
-
-    private Timer timer(URI uri) {
-        return metricRegistry.timer(MetricRegistry.name(HTTP2Client.class, name, uri.getHost()));
+        final HttpRequest req = super.newHttpRequest(conversation, uri);
+        final InstrumentedListener listener = new InstrumentedListener(metricRegistry, nameStrategy);
+        req.listener(listener);
+        req.onResponseBegin((response) -> listener.onResponseBegin());
+        req.onResponseSuccess((result) -> listener.onResponseComplete(null, result));
+        req.onResponseFailure((x, exn) -> listener.onResponseComplete(exn, x));
+        return req;
     }
 }

@@ -8,6 +8,8 @@
     <version>0.2-SNAPSHOT</version>
 
     <name>Dropwizard Integration with Jetty HTTP/2 client</name>
+    <description>Dropwizard Integration with Jetty HTTP/1.1 and HTTP/2 client</description>
+    <url>https://github.com/arteam/dropwizard-http2-client</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +29,14 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>arteam</id>
+            <name>Artem Prigoda</name>
+            <email>prigoda.artem@ya.ru</email>
+        </developer>
+    </developers>
 
     <dependencyManagement>
         <dependencies>
@@ -78,6 +88,19 @@
                         -Xbootclasspath/p:/${user.home}/.m2/repository/org/mortbay/jetty/alpn/alpn-boot/${alpn-boot.version}/alpn-boot-${alpn-boot.version}.jar
                     </argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -143,6 +166,38 @@
     <!-- Profiles for selecting the correct version of alpn-boot for each JDK.
          see http://www.eclipse.org/jetty/documentation/current/alpn-chapter.html for reference. -->
     <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <configuration>
+                            <gpgArguments>
+                                <argument>--no-tty</argument>
+                            </gpgArguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>jdk-1.8.0</id>
             <activation>
@@ -435,10 +490,18 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray-arteam-maven</id>
-            <name>arteam-maven</name>
-            <url>https://api.bintray.com/maven/arteam/maven/dropwizard-http2-client</url>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -4,7 +4,7 @@
 
     <groupId>com.github.arteam</groupId>
     <artifactId>dropwizard-http2-client</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
 
     <name>Dropwizard Integration with Jetty HTTP/2 client</name>
     <description>Dropwizard Integration with Jetty HTTP/1.1 and HTTP/2 client</description>
@@ -18,7 +18,7 @@
     <scm>
         <developerConnection>scm:git:git@github.com:arteam/dropwizard-http2-client.git</developerConnection>
         <url>https://github.com/arteam/dropwizard-http2-client</url>
-        <tag>dropwizard-http2-client-0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>

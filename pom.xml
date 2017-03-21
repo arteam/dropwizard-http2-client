@@ -84,7 +84,7 @@
                 <version>2.18.1</version>
                 <configuration>
                     <argLine>
-                        -Xbootclasspath/p:/${user.home}/.m2/repository/org/mortbay/jetty/alpn/alpn-boot/${alpn-boot.version}/alpn-boot-${alpn-boot.version}.jar
+                        -Xbootclasspath/"p:/${user.home}/.m2/repository/org/mortbay/jetty/alpn/alpn-boot/${alpn-boot.version}/alpn-boot-${alpn-boot.version}.jar"
                     </argLine>
                 </configuration>
             </plugin>

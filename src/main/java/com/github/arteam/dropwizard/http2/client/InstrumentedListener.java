@@ -65,6 +65,11 @@ public class InstrumentedListener extends Request.Listener.Adapter {
      */
     private Counter onQueue;
 
+    /**
+     * The current state of the request
+     */
+    private RequestState state = RequestState.NONE;
+
     public InstrumentedListener(MetricRegistry metricRegistry, NameStrategy name) {
         this.metricRegistry = metricRegistry;
         this.name = name;
@@ -85,6 +90,7 @@ public class InstrumentedListener extends Request.Listener.Adapter {
         onQueue = metricRegistry.counter(name(metricName, "on-queue"));
         onQueue.inc();
         queueContext = queue.time();
+        state = RequestState.QUEUED;
     }
 
     @Override
@@ -92,21 +98,45 @@ public class InstrumentedListener extends Request.Listener.Adapter {
         onQueue.dec();
         queueContext.stop();
         totalContext = total.time();
+        state = RequestState.BEGIN;
     }
 
     @Override
     public void onCommit(Request request) {
         ttfbContext = timeToFirstByte.time();
         inflight.inc();
+        state = RequestState.COMMIT;
     }
 
     public void onResponseBegin() {
         ttfbContext.stop();
+        state = RequestState.RESPONSE_BEGIN;
     }
 
     public void onResponseComplete(Throwable exn, Response response) {
-        totalContext.stop();
-        inflight.dec();
+        // First we must stop all ongoing metrics. Depending on which stage the request
+        // completed in the metrics to stop differs.
+        switch (state) {
+            // The request immediately errored so no metrics could even be created
+            case NONE:
+                return;
+            case QUEUED:
+                onQueue.dec();
+                queueContext.stop();
+                break;
+            case BEGIN:
+                totalContext.stop();
+                break;
+            case COMMIT:
+                totalContext.stop();
+                ttfbContext.stop();
+                inflight.dec();
+                break;
+            case RESPONSE_BEGIN:
+                totalContext.stop();
+                inflight.dec();
+                break;
+        }
 
         if (exn != null) {
             requestException.mark();
@@ -125,5 +155,16 @@ public class InstrumentedListener extends Request.Listener.Adapter {
                     requestOtherStatus.mark();
             }
         }
+    }
+
+    /**
+     * Represents the states of a HTTP request that is not completed
+     */
+    private enum RequestState {
+        NONE,
+        QUEUED,
+        BEGIN,
+        RESPONSE_BEGIN,
+        COMMIT
     }
 }

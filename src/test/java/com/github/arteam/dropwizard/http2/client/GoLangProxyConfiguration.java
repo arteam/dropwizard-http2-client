@@ -9,15 +9,15 @@ import io.dropwizard.Configuration;
  */
 public class GoLangProxyConfiguration extends Configuration {
 
-    private Http2ClientConfiguration h2Client;
+    private JettyClientConfiguration h2Client;
 
     @JsonProperty
-    public Http2ClientConfiguration getH2Client() {
+    public JettyClientConfiguration getH2Client() {
         return h2Client;
     }
 
     @JsonProperty
-    public void setH2Client(Http2ClientConfiguration h2Client) {
+    public void setH2Client(JettyClientConfiguration h2Client) {
         this.h2Client = h2Client;
     }
 }

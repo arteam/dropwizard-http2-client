@@ -32,7 +32,7 @@ public class Http2ClientExternalServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        httpClient = new Http2ClientBuilder(environment).build();
+        httpClient = new JettyClientBuilder(environment).build();
         for (LifeCycle managedObject : environment.lifecycle().getManagedObjects()) {
             managedObject.start();
         }

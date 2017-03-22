@@ -12,7 +12,7 @@ import org.eclipse.jetty.client.HttpClient;
 public class GoLangProxyApplication extends Application<GoLangProxyConfiguration> {
     @Override
     public void run(GoLangProxyConfiguration configuration, Environment environment) throws Exception {
-        HttpClient httpClient = new Http2ClientBuilder(environment)
+        HttpClient httpClient = new JettyClientBuilder(environment)
                 .using(configuration.getH2Client())
                 .build("dropwizard-http2-golang");
         environment.jersey().register(new GoLangProxyResource(httpClient));

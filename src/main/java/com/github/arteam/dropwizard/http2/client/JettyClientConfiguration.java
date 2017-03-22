@@ -10,9 +10,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * The external configuration class for {@link Http2ClientBuilder}.
+ * The external configuration class for {@link JettyClientBuilder}.
  */
-public class Http2ClientConfiguration {
+public class JettyClientConfiguration {
 
     /**
      * The max waiting time to connect to a destination

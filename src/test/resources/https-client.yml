@@ -1,0 +1,10 @@
+connectionTimeout: 1s
+idleTimeout: 5m
+connectionFactory:
+    type : 'https'
+    keyStorePath:       client.jks
+    keyStorePassword:   http2_client
+    trustStorePath:     servers.jks
+    trustStorePassword: http2_server
+    supportedProtocols:
+      - 'TLSv1.2'

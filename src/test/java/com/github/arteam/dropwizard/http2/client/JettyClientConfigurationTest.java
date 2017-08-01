@@ -86,7 +86,7 @@ public class JettyClientConfigurationTest {
         assertThat(https.getTrustStoreType()).isEqualTo("JKS");
 
         assertThat(https.getSupportedProtocols()).containsOnly("TLSv1.2");
-        assertThat(https.getSupportedCipherSuites()).containsOnly("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
+        assertThat(https.getSupportedCipherSuites()).containsOnly("TLS_ECDHE.*");
     }
 
     @Test

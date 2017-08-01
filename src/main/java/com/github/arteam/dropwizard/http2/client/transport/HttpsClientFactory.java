@@ -27,7 +27,7 @@ public class HttpsClientFactory {
 
     private List<String> supportedProtocols = ImmutableList.of("TLSv1.2");
     private List<String> excludedProtocols;
-    private List<String> supportedCipherSuites = ImmutableList.of("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
+    private List<String> supportedCipherSuites = ImmutableList.of("TLS_ECDHE.*");
     private List<String> excludedCipherSuites;
 
     private boolean validateCerts = true;

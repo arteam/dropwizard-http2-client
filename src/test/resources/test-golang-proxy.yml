@@ -6,5 +6,5 @@ server:
     - type: http
       port: 0
 h2Client:
-  connectionTimeout: 1s
+  connectionTimeout: 2s
   idleTimeout: 2s

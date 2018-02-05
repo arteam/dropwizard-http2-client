@@ -47,9 +47,9 @@ public class Http2ClientExternalServiceTest {
 
     @Test
     public void testExternalService() throws Exception {
-        String content = httpClient.GET("https://nghttp2.org/httpbin/headers")
+        String content = httpClient.GET("https://http2.golang.org/reqinfo")
                 .getContentAsString();
-        assertThat(content).contains("\"Host\": \"nghttp2.org:443\"");
+        assertThat(content).contains("Host: http2.golang.org");
     }
 }
 

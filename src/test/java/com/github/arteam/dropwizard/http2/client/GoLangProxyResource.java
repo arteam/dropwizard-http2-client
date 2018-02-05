@@ -23,6 +23,6 @@ public class GoLangProxyResource {
 
     @GET
     public String get() throws Exception {
-        return httpClient.GET("https://nghttp2.org/httpbin/headers").getContentAsString();
+        return httpClient.GET("https://http2.golang.org/reqinfo").getContentAsString();
     }
 }

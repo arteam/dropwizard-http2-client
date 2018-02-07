@@ -80,23 +80,6 @@ connectionFactory:
 <dependency>
     <groupId>com.github.arteam</groupId>
     <artifactId>dropwizard-http2-client</artifactId>
-    <version>0.2</version>
+    <version>0.4</version>
 </dependency>
 ```
-
-If you use the Dropwizard BOM in your application, you are forced to declare transitive dependencies:
-```xml
-<dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-client</artifactId>
-    <scope>compile</scope>
-</dependency>
-
-<dependency>
-   <groupId>org.eclipse.jetty.http2</groupId>
-   <artifactId>http2-http-client-transport</artifactId>
-   <scope>compile</scope>
-</dependency>
-```
-
-This will be fixed in future Dropwizard versions.

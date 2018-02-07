@@ -32,7 +32,7 @@ public class HttpsClientFactory {
 
     private boolean validateCerts = true;
     private boolean validatePeers = true;
-
+    private String jceProvider;
 
     @JsonProperty
     public boolean isValidatePeers() {
@@ -174,13 +174,22 @@ public class HttpsClientFactory {
         this.keyStorePath = keyStorePath;
     }
 
+    @JsonProperty
+    public String getJceProvider() {
+        return jceProvider;
+    }
+
+    @JsonProperty
+    public void setJceProvider(String jceProvider) {
+        this.jceProvider = jceProvider;
+    }
+
     @Nullable
     public SslContextFactory sslContextFactory() {
         SslContextFactory factory = new SslContextFactory();
         if (keyStorePath != null) {
             factory.setKeyStorePath(keyStorePath);
         }
-
         factory.setKeyStoreType(keyStoreType);
 
         if (keyStorePassword != null) {
@@ -223,6 +232,9 @@ public class HttpsClientFactory {
         if (excludedCipherSuites != null) {
             factory.setExcludeCipherSuites(Iterables.toArray(excludedCipherSuites, String.class));
         }
+        if (jceProvider != null) {
+            factory.setProvider(jceProvider);
+        }
 
         return factory;
     }
@@ -244,6 +256,7 @@ public class HttpsClientFactory {
                 .add("excludedCipherSuites", excludedCipherSuites)
                 .add("validateCerts", validateCerts)
                 .add("validatePeers", validatePeers)
+                .add("jceProvider", jceProvider)
                 .toString();
     }
 }

@@ -2,6 +2,7 @@ connectionTimeout: 1s
 idleTimeout: 5m
 connectionFactory:
     type : 'https'
+    jceProvider: 'SUN'
     keyStorePath:       client.jks
     keyStorePassword:   http2_client
     trustStorePath:     servers.jks

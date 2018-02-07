@@ -54,6 +54,7 @@ public class JettyClientConfigurationTest {
 
         assertThat(http2.getSupportedProtocols()).containsOnly("TLSv1.2");
         assertThat(http2.getSupportedCipherSuites()).containsOnly("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
+        assertThat(http2.getJceProvider()).isEqualTo("SUN");
     }
 
     @Test
@@ -87,6 +88,7 @@ public class JettyClientConfigurationTest {
 
         assertThat(https.getSupportedProtocols()).containsOnly("TLSv1.2");
         assertThat(https.getSupportedCipherSuites()).containsOnly("TLS_ECDHE.*");
+        assertThat(https.getJceProvider()).isEqualTo("SUN");
     }
 
     @Test

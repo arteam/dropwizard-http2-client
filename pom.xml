@@ -168,6 +168,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-alpn-conscrypt-client</artifactId>
+            <version>9.4.8.v20171121</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <!-- Profiles for selecting the correct version of alpn-boot for each JDK.

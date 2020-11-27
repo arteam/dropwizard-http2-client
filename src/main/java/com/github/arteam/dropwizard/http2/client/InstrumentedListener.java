@@ -105,7 +105,9 @@ public class InstrumentedListener extends Request.Listener.Adapter {
     }
 
     public void onResponseComplete(Throwable exn, Response response) {
-        totalContext.stop();
+        if (totalContext != null) {
+            totalContext.stop();
+        }
         inflight.dec();
 
         if (exn != null) {

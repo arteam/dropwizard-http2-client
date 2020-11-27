@@ -90,6 +90,7 @@ public class Http2ClientIntegrationTest {
         h2transport.setTrustStorePath(ResourceHelpers.resourceFilePath("stores/h2_client.jts"));
         h2transport.setTrustStorePassword("h2_client");
         h2transport.setValidatePeers(false);
+        h2transport.setTrustAll(true);
         h2conf.setConnectionFactoryBuilder(h2transport);
 
         HttpClient client = new JettyClientBuilder(environment)

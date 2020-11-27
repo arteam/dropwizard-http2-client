@@ -1,7 +1,9 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.dropwizard.Configuration;
 import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.logging.BootstrapLogging;
 import io.dropwizard.setup.Environment;
@@ -26,7 +28,8 @@ public class Http2ClientExternalServiceTest {
     }
 
     private Environment environment = new Environment("default", new ObjectMapper(),
-            Validators.newValidator(), new MetricRegistry(), ClassLoader.getSystemClassLoader());
+            Validators.newValidatorFactory(), new MetricRegistry(), ClassLoader.getSystemClassLoader(),
+            new HealthCheckRegistry(), new Configuration());
 
     private HttpClient httpClient;
 

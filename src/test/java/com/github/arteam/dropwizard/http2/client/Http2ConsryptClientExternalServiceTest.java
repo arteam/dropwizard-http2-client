@@ -2,8 +2,10 @@ package com.github.arteam.dropwizard.http2.client;
 
 import ch.qos.logback.classic.Level;
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
+import io.dropwizard.Configuration;
 import io.dropwizard.jersey.validation.Validators;
 import io.dropwizard.logging.BootstrapLogging;
 import io.dropwizard.setup.Environment;
@@ -32,7 +34,8 @@ public class Http2ConsryptClientExternalServiceTest {
     }
 
     private Environment environment = new Environment("default", new ObjectMapper(),
-            Validators.newValidator(), new MetricRegistry(), ClassLoader.getSystemClassLoader());
+            Validators.newValidatorFactory(), new MetricRegistry(), ClassLoader.getSystemClassLoader(),
+            new HealthCheckRegistry(), new Configuration());
 
     private HttpClient httpClient;
 

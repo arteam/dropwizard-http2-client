@@ -34,6 +34,8 @@ public class HttpsClientFactory {
     private boolean validatePeers = true;
     private String jceProvider;
 
+    private boolean trustAll = false;
+
     @JsonProperty
     public boolean isValidatePeers() {
         return validatePeers;
@@ -184,9 +186,19 @@ public class HttpsClientFactory {
         this.jceProvider = jceProvider;
     }
 
+    @JsonProperty
+    public boolean isTrustAll() {
+        return trustAll;
+    }
+
+    @JsonProperty
+    public void setTrustAll(boolean trustAll) {
+        this.trustAll = trustAll;
+    }
+
     @Nullable
     public SslContextFactory sslContextFactory() {
-        SslContextFactory factory = new SslContextFactory();
+        SslContextFactory factory = new SslContextFactory.Client(trustAll);
         if (keyStorePath != null) {
             factory.setKeyStorePath(keyStorePath);
         }

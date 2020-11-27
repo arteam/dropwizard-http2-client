@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dropwizard.version>1.2.3</dropwizard.version>
         <!-- Default alpn-boot version. See <profiles> for specific profiles. -->
-        <alpn-boot.version>8.1.12.v20180117</alpn-boot.version>
+        <alpn-boot.version>8.1.13.v20181017</alpn-boot.version>
     </properties>
 
     <scm>

@@ -4,6 +4,7 @@ import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.client.JerseyClient;
 import org.glassfish.jersey.client.JerseyClientBuilder;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -13,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Artem Prigoda (a.prigoda)
  * @since 26.03.16
  */
-public class GoLangProxyIntegrationTest {
+@Ignore("Takes a lot of time")
+public class HttpBinProxyIntegrationTest {
 
     @Rule
     public DropwizardAppRule<GoLangProxyConfiguration> appRule = new
@@ -31,7 +33,7 @@ public class GoLangProxyIntegrationTest {
                     .request()
                     .get()
                     .readEntity(String.class);
-            assertThat(content).contains("Host: http2.golang.org");
+            assertThat(content).contains("\"Host\": \"httpbin.org\"");
             now = System.currentTimeMillis();
             if (attempt++ % 5 == 0) { // 5 attempts reuse the same connection
                 Thread.sleep(4000); // Force reopening the connection

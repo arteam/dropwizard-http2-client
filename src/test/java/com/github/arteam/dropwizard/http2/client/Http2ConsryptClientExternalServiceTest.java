@@ -11,6 +11,8 @@ import io.dropwizard.logging.BootstrapLogging;
 import io.dropwizard.setup.Environment;
 import org.conscrypt.OpenSSLProvider;
 import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.client.api.ContentResponse;
+import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.junit.After;
 import org.junit.Before;
@@ -64,9 +66,10 @@ public class Http2ConsryptClientExternalServiceTest {
 
     @Test
     public void testExternalService() throws Exception {
-        String content = httpClient.GET("https://http2.golang.org/reqinfo")
-                .getContentAsString();
-        assertThat(content).contains("Host: http2.golang.org");
+        ContentResponse contentResponse = httpClient.GET("https://httpbin.org/get");
+        String content = contentResponse.getContentAsString();
+        assertThat(content).contains("\"Host\": \"httpbin.org\"");
+        assertThat(contentResponse.getVersion()).isEqualTo(HttpVersion.HTTP_2);
     }
 }
 

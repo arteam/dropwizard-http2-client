@@ -15,7 +15,7 @@ public class GoLangProxyApplication extends Application<GoLangProxyConfiguration
         HttpClient httpClient = new JettyClientBuilder(environment)
                 .using(configuration.getH2Client())
                 .build("dropwizard-http2-golang");
-        environment.jersey().register(new GoLangProxyResource(httpClient));
+        environment.jersey().register(new HttpBinProxyResource(httpClient));
         environment.healthChecks().register("fake", new HealthCheck() {
             @Override
             protected Result check() throws Exception {

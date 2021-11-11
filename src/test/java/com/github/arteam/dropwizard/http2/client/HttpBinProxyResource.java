@@ -13,16 +13,16 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/")
 @Produces(MediaType.TEXT_PLAIN)
-public class GoLangProxyResource {
+public class HttpBinProxyResource {
 
     private HttpClient httpClient;
 
-    public GoLangProxyResource(HttpClient httpClient) {
+    public HttpBinProxyResource(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     @GET
     public String get() throws Exception {
-        return httpClient.GET("https://http2.golang.org/reqinfo").getContentAsString();
+        return httpClient.GET("https://httpbin.org/get").getContentAsString();
     }
 }

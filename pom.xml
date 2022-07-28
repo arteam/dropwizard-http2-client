@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dropwizard.version>2.0.28</dropwizard.version>
-        <jetty.version>9.4.35.v20201120</jetty.version>
+        <jetty.version>9.4.44.v20210927</jetty.version>
     </properties>
 
     <scm>
@@ -110,7 +110,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-client</artifactId>
-            <version>9.4.35.v20201120</version>
+            <version>${jetty.version}</version>
             <scope>compile</scope>
         </dependency>
 

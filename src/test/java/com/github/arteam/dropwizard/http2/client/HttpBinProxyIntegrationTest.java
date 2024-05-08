@@ -1,12 +1,13 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.glassfish.jersey.client.JerseyClient;
 import org.glassfish.jersey.client.JerseyClientBuilder;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Artem Prigoda (a.prigoda)
  * @since 26.03.16
  */
-@Ignore("Takes a lot of time")
+@ExtendWith(DropwizardExtensionsSupport.class)
+@Disabled("Takes a lot of time")
 public class HttpBinProxyIntegrationTest {
 
-    @Rule
-    public DropwizardAppRule<GoLangProxyConfiguration> appRule = new
-            DropwizardAppRule<>(GoLangProxyApplication.class,
+    public DropwizardAppExtension<GoLangProxyConfiguration> appRule = new
+            DropwizardAppExtension<>(GoLangProxyApplication.class,
             ResourceHelpers.resourceFilePath("test-golang-proxy.yml"));
 
     @Test

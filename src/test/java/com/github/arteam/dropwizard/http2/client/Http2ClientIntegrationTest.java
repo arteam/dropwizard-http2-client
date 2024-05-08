@@ -10,13 +10,14 @@ import io.dropwizard.setup.Environment;
 import io.dropwizard.testing.ConfigOverride;
 import io.dropwizard.testing.FixtureHelpers;
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Artem Prigoda
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class Http2ClientIntegrationTest {
 
     static {
@@ -43,18 +45,16 @@ public class Http2ClientIntegrationTest {
     private MetricRegistry metricRegistry = new MetricRegistry();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @ClassRule
-    public static final DropwizardAppRule<TestConfiguration> h2c = new DropwizardAppRule<>(TestApplication.class,
+    public static final DropwizardAppExtension<TestConfiguration> h2c = new DropwizardAppExtension<>(TestApplication.class,
             ResourceHelpers.resourceFilePath("http2c-server.yml"));
 
-    @ClassRule
-    public static final DropwizardAppRule<TestConfiguration> h2 = new DropwizardAppRule<>(
+    public static final DropwizardAppExtension<TestConfiguration> h2 = new DropwizardAppExtension<>(
             TestApplication.class, ResourceHelpers.resourceFilePath("http2-server.yml"),
             ConfigOverride.config("server.connector.keyStorePath",
                     ResourceHelpers.resourceFilePath("stores/h2_server.jks"))
     );
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
         Mockito.doAnswer(invocation -> {
@@ -65,7 +65,7 @@ public class Http2ClientIntegrationTest {
         when(environment.metrics()).thenReturn(metricRegistry);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         lifeCycle.stop();
     }

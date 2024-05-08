@@ -11,9 +11,9 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +35,7 @@ public class Http2ClientExternalServiceTest {
 
     private HttpClient httpClient;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         httpClient = new JettyClientBuilder(environment).build();
         for (LifeCycle managedObject : environment.lifecycle().getManagedObjects()) {
@@ -43,7 +43,7 @@ public class Http2ClientExternalServiceTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         for (LifeCycle managedObject : environment.lifecycle().getManagedObjects()) {
             managedObject.stop();

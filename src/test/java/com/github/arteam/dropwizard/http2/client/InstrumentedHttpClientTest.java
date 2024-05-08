@@ -5,28 +5,29 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.github.arteam.dropwizard.http2.client.names.NameStrategies;
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.assertj.core.api.SoftAssertions;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.http.HttpClientTransportOverHTTP;
 import org.eclipse.jetty.http2.client.HTTP2Client;
-import org.junit.After;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class InstrumentedHttpClientTest {
-    @ClassRule
-    public static final DropwizardAppRule<TestConfiguration> rule = new DropwizardAppRule<>(TestApplication.class,
+    public static final DropwizardAppExtension<TestConfiguration> rule = new DropwizardAppExtension<>(TestApplication.class,
             ResourceHelpers.resourceFilePath("server.yml"));
 
     private final MetricRegistry metrics = new MetricRegistry();
     private HttpClient client;
 
-    @After
+    @AfterEach
     public void after() throws Exception {
         if (client != null) {
             client.stop();

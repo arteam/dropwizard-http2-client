@@ -14,9 +14,9 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.http.HttpVersion;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.security.Security;
 
@@ -41,7 +41,7 @@ public class Http2ConsryptClientExternalServiceTest {
 
     private HttpClient httpClient;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Http2ClientTransportFactory clientTransportFactory = new Http2ClientTransportFactory();
         clientTransportFactory.setJceProvider("Conscrypt");
@@ -57,7 +57,7 @@ public class Http2ConsryptClientExternalServiceTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         for (LifeCycle managedObject : environment.lifecycle().getManagedObjects()) {
             managedObject.stop();

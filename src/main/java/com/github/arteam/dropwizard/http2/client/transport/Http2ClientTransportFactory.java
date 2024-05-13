@@ -32,9 +32,6 @@ public class Http2ClientTransportFactory extends HttpsClientFactory implements C
 
     @Override
     public HttpClientTransport httpClientTransport() {
-        // If we don't specify a connection factory, an SSL connection factory with
-        // ALPN and HTTP/2 will be used by default. The configured SslContextFactory
-        // will be passed from HttpClient.
         ClientConnector connector = new ClientConnector();
         connector.setSslContextFactory(sslContextFactory());
         HTTP2Client http2Client = new HTTP2Client(connector);

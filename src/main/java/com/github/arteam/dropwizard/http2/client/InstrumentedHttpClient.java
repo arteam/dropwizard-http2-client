@@ -6,7 +6,6 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.client.HttpConversation;
 import org.eclipse.jetty.client.HttpRequest;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.net.URI;
 
@@ -24,11 +23,10 @@ public class InstrumentedHttpClient extends HttpClient {
 
     public InstrumentedHttpClient(
             HttpClientTransport transport,
-            SslContextFactory sslContextFactory,
             MetricRegistry metricRegistry,
             NameStrategy nameStrategy
     ) {
-        super(transport, sslContextFactory);
+        super(transport);
         this.metricRegistry = metricRegistry;
         this.nameStrategy = nameStrategy;
     }

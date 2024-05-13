@@ -1,8 +1,8 @@
 package com.github.arteam.dropwizard.http2.client;
 
 import com.codahale.metrics.health.HealthCheck;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Environment;
 
 /**
  * Date: 1/4/16

@@ -36,8 +36,7 @@ public class InstrumentedHttpClientTest {
 
     @Test
     public void testInstrumentation() throws Exception {
-        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(),
-                null, metrics, NameStrategies.prefixedStrategy(MetricRegistry.name(HTTP2Client.class), NameStrategies.HOST));
+        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(), metrics, NameStrategies.prefixedStrategy(MetricRegistry.name(HTTP2Client.class), NameStrategies.HOST));
         client.start();
         client.GET(String.format("http://127.0.0.1:%d/application/greet-chunk", rule.getLocalPort())).getContentAsString();
         final Timer ttfb = metrics.getTimers().get("org.eclipse.jetty.http2.client.HTTP2Client.127.0.0.1.time-to-first-byte");
@@ -75,8 +74,7 @@ public class InstrumentedHttpClientTest {
     @Test
     public void testMethodStrategy() throws Exception {
         final MetricRegistry metrics = new MetricRegistry();
-        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(),
-                null, metrics, NameStrategies.METHOD);
+        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(), metrics, NameStrategies.METHOD);
         client.start();
         client.GET(String.format("http://127.0.0.1:%d/application/greet-chunk", rule.getLocalPort())).getContentAsString();
         assertThat(metrics.getTimers()).containsKey("GET.time-to-first-byte");
@@ -85,8 +83,7 @@ public class InstrumentedHttpClientTest {
     @Test
     public void testFullNameStrategy() throws Exception {
         final MetricRegistry metrics = new MetricRegistry();
-        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(),
-                null, metrics, NameStrategies.FULL);
+        client = new InstrumentedHttpClient(new HttpClientTransportOverHTTP(), metrics, NameStrategies.FULL);
         client.start();
         client.GET(String.format("http://127.0.0.1:%d/application/greet-chunk", rule.getLocalPort())).getContentAsString();
         assertThat(metrics.getTimers()).containsKey("127.0.0.1.GET./application/greet-chunk.time-to-first-byte");

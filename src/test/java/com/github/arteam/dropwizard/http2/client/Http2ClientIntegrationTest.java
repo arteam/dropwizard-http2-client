@@ -4,11 +4,10 @@ import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.arteam.dropwizard.http2.client.transport.Http2ClearClientTransportFactory;
 import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
-import io.dropwizard.logging.BootstrapLogging;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.logging.common.BootstrapLogging;
 import io.dropwizard.testing.ConfigOverride;
-import io.dropwizard.testing.FixtureHelpers;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -80,7 +79,7 @@ public class Http2ClientIntegrationTest {
         String response = client.GET(String.format("http://127.0.0.1:%d/application/greet", h2c.getLocalPort()))
                 .getContentAsString();
         assertThat(objectMapper.readTree(response))
-                .isEqualTo(objectMapper.readTree(FixtureHelpers.fixture("server_response.json")));
+                .isEqualTo(objectMapper.readTree(getClass().getResource("/server_response.json")));
     }
 
     @Test
@@ -91,6 +90,7 @@ public class Http2ClientIntegrationTest {
         h2transport.setTrustStorePassword("h2_client");
         h2transport.setValidatePeers(false);
         h2transport.setTrustAll(true);
+        h2transport.setEndpointIdentificationAlgorithm(null);
         h2conf.setConnectionFactoryBuilder(h2transport);
 
         HttpClient client = new JettyClientBuilder(environment)
@@ -99,6 +99,6 @@ public class Http2ClientIntegrationTest {
         String response = client.GET(String.format("https://127.0.0.1:%d/application/greet", h2.getLocalPort()))
                 .getContentAsString();
         assertThat(objectMapper.readTree(response))
-                .isEqualTo(objectMapper.readTree(FixtureHelpers.fixture("server_response.json")));
+                .isEqualTo(objectMapper.readTree(getClass().getResource("/server_response.json")));
     }
 }

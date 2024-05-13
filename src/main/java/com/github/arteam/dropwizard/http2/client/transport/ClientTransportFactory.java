@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.dropwizard.jackson.Discoverable;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-
-import javax.annotation.Nullable;
 
 /**
  * Date: 11/26/15
@@ -20,14 +17,6 @@ import javax.annotation.Nullable;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type",
         defaultImpl = Http2ClientTransportFactory.class)
 public interface ClientTransportFactory extends Discoverable {
-
-    /**
-     * Configures the SSL context for an HTTP/2 client.
-     *
-     * @return a configured {@link SslContextFactory}
-     */
-    @Nullable
-    SslContextFactory sslContextFactory();
 
     /**
      * Configures the transport implementation for an HTTP/2 client

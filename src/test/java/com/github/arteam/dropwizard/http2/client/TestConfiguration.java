@@ -1,6 +1,6 @@
 package com.github.arteam.dropwizard.http2.client;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 
 /**
  * Date: 1/4/16

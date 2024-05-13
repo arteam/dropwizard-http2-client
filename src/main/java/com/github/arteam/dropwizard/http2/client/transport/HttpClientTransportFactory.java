@@ -4,17 +4,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.client.http.HttpClientTransportOverHTTP;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-
-import javax.annotation.Nullable;
 
 @JsonTypeName("http")
 public class HttpClientTransportFactory implements ClientTransportFactory {
-    @Nullable
-    @Override
-    public SslContextFactory.Client sslContextFactory() {
-        return null;
-    }
 
     @Override
     public HttpClientTransport httpClientTransport() {

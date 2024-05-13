@@ -6,9 +6,6 @@ import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-
-import javax.annotation.Nullable;
 
 /**
  * Date: 11/26/15
@@ -23,12 +20,6 @@ import javax.annotation.Nullable;
  */
 @JsonTypeName("h2c")
 public class Http2ClearClientTransportFactory implements ClientTransportFactory {
-
-    @Override
-    @Nullable
-    public SslContextFactory.Client sslContextFactory() {
-        return null;
-    }
 
     @Override
     public HttpClientTransport httpClientTransport() {

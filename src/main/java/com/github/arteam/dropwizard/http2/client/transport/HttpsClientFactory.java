@@ -197,8 +197,8 @@ public class HttpsClientFactory {
     }
 
     @Nullable
-    public SslContextFactory sslContextFactory() {
-        SslContextFactory factory = new SslContextFactory.Client(trustAll);
+    public SslContextFactory.Client sslContextFactory() {
+        SslContextFactory.Client factory = new SslContextFactory.Client(trustAll);
         if (keyStorePath != null) {
             factory.setKeyStorePath(keyStorePath);
         }

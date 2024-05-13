@@ -5,7 +5,6 @@ import com.google.common.base.MoreObjects;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.http2.client.HTTP2Client;
-import org.eclipse.jetty.http2.client.HTTP2ClientConnectionFactory;
 import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
@@ -27,7 +26,7 @@ public class Http2ClearClientTransportFactory implements ClientTransportFactory 
 
     @Override
     @Nullable
-    public SslContextFactory sslContextFactory() {
+    public SslContextFactory.Client sslContextFactory() {
         return null;
     }
 
@@ -35,7 +34,6 @@ public class Http2ClearClientTransportFactory implements ClientTransportFactory 
     public HttpClientTransport httpClientTransport() {
         // Explicitly set the HTTP/2 connection factory, because we don't need SSL and ALPN.
         final HTTP2Client client = new HTTP2Client();
-        client.setClientConnectionFactory(new HTTP2ClientConnectionFactory());
         return new HttpClientTransportOverHTTP2(client);
     }
 

@@ -27,7 +27,7 @@ public interface ClientTransportFactory extends Discoverable {
      * @return a configured {@link SslContextFactory}
      */
     @Nullable
-    SslContextFactory sslContextFactory();
+    SslContextFactory.Client sslContextFactory();
 
     /**
      * Configures the transport implementation for an HTTP/2 client

@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 public class HttpClientTransportFactory implements ClientTransportFactory {
     @Nullable
     @Override
-    public SslContextFactory sslContextFactory() {
+    public SslContextFactory.Client sslContextFactory() {
         return null;
     }
 

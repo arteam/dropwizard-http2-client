@@ -1,23 +1,17 @@
 package com.github.arteam.dropwizard.http2.client.transport;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.google.common.base.MoreObjects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.HttpClientTransport;
 import org.eclipse.jetty.http2.client.HTTP2Client;
 import org.eclipse.jetty.http2.client.http.HttpClientTransportOverHTTP2;
 import org.eclipse.jetty.io.ByteBufferPool;
+import org.eclipse.jetty.io.ClientConnector;
 import org.eclipse.jetty.io.MappedByteBufferPool;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.Executor;
 
 /**
@@ -41,7 +35,9 @@ public class Http2ClientTransportFactory extends HttpsClientFactory implements C
         // If we don't specify a connection factory, an SSL connection factory with
         // ALPN and HTTP/2 will be used by default. The configured SslContextFactory
         // will be passed from HttpClient.
-        HTTP2Client http2Client = new HTTP2Client();
+        ClientConnector connector = new ClientConnector();
+        connector.setSslContextFactory(sslContextFactory());
+        HTTP2Client http2Client = new HTTP2Client(connector);
         http2Client.setExecutor(executor);
         http2Client.setByteBufferPool(byteBufferPool);
         return new HttpClientTransportOverHTTP2(http2Client);

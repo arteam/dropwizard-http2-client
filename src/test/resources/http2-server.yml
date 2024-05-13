@@ -6,3 +6,4 @@ server:
       keyStorePassword: 'h2_server'
       validateCerts: false
       validatePeers: false
+      disableSniHostCheck: true

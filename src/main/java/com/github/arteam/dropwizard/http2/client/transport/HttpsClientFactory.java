@@ -35,6 +35,7 @@ public class HttpsClientFactory {
     private String jceProvider;
 
     private boolean trustAll = false;
+    private String endpointIdentificationAlgorithm = "HTTPS";
 
     @JsonProperty
     public boolean isValidatePeers() {
@@ -196,6 +197,16 @@ public class HttpsClientFactory {
         this.trustAll = trustAll;
     }
 
+    @JsonProperty
+    public String getEndpointIdentificationAlgorithm() {
+        return endpointIdentificationAlgorithm;
+    }
+
+    @JsonProperty
+    public void setEndpointIdentificationAlgorithm(String endpointIdentificationAlgorithm) {
+        this.endpointIdentificationAlgorithm = endpointIdentificationAlgorithm;
+    }
+
     @Nullable
     public SslContextFactory.Client sslContextFactory() {
         SslContextFactory.Client factory = new SslContextFactory.Client(trustAll);
@@ -247,6 +258,7 @@ public class HttpsClientFactory {
         if (jceProvider != null) {
             factory.setProvider(jceProvider);
         }
+        factory.setEndpointIdentificationAlgorithm(endpointIdentificationAlgorithm);
 
         return factory;
     }
@@ -269,6 +281,7 @@ public class HttpsClientFactory {
                 .add("validateCerts", validateCerts)
                 .add("validatePeers", validatePeers)
                 .add("jceProvider", jceProvider)
+                .add("endpointIdentificationAlgorithm", endpointIdentificationAlgorithm)
                 .toString();
     }
 }

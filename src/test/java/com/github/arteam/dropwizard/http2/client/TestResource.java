@@ -7,7 +7,6 @@ import org.glassfish.jersey.server.ChunkedOutput;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Date: 1/4/16
@@ -19,7 +18,11 @@ import java.util.concurrent.Executors;
 @Path("/")
 public class TestResource {
 
-    private ExecutorService executor = Executors.newCachedThreadPool();
+    private ExecutorService executor;
+
+    public TestResource(ExecutorService executor) {
+        this.executor = executor;
+    }
 
     @GET
     @Path("/greet")

@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import jakarta.annotation.Nullable;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class HttpsClientFactory {

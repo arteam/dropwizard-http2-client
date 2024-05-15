@@ -5,9 +5,8 @@ import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactor
 import com.github.arteam.dropwizard.http2.client.transport.Http2ClientTransportFactory;
 import com.google.common.base.MoreObjects;
 import io.dropwizard.util.Duration;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * The external configuration class for {@link JettyClientBuilder}.

@@ -113,7 +113,7 @@ public class InstrumentedListener extends Request.Listener.Adapter {
         if (exn != null) {
             requestException.mark();
         } else {
-            switch (javax.ws.rs.core.Response.Status.Family.familyOf(response.getStatus())) {
+            switch (jakarta.ws.rs.core.Response.Status.Family.familyOf(response.getStatus())) {
                 case SUCCESSFUL:
                     request2xx.mark();
                     break;

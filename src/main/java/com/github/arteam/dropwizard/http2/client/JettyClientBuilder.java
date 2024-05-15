@@ -5,12 +5,11 @@ import com.github.arteam.dropwizard.http2.client.names.NameStrategy;
 import com.github.arteam.dropwizard.http2.client.transport.ClientTransportFactory;
 import com.google.common.base.Strings;
 import io.dropwizard.core.setup.Environment;
+import jakarta.annotation.Nullable;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.util.HttpCookieStore;
-
-import javax.annotation.Nullable;
 
 /**
  * Date: 11/26/15
